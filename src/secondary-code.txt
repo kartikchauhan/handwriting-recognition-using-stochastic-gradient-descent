@@ -1,0 +1,39 @@
+// import images
+
+import mnist_loader
+>>> training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
+
+// make a network
+net = network.Network([784, 30, 10])
+
+784 nurons in the first layer (28 * 28 image) 
+30 neurons in the second layer
+10 neuwrons in the last layer indicating 10 digits
+
+// train neural network
+net.SGD(training_data, 30, 10, 3.0, test_data=test_data)
+// 30 is number of hidden neurons or epochs or number of times random mini_set will be taken
+3.0 is eta(n)
+
+when eta = 3.0 -> percentage 96.5
+when eta = 0.01 -> percentage 11.20 
+
+// show image
+import gzip
+import pickle
+
+
+with gzip.open('../data/mnist.pkl.gz', 'rb') as f:
+    train_set, valid_set, test_set = pickle.load(f)
+
+train_x, train_y = train_set
+
+import matplotlib.cm as cm
+import matplotlib.pyplot as plt
+
+
+plt.imshow(train_x[0].reshape((28, 28)), cmap=cm.Greys_r)
+plt.show()
+
+
+
